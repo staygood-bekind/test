@@ -252,6 +252,38 @@
       .topbar{padding:0 12px;}
       .btn{display:none;}
     }
+    .section-title {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.home-choices {
+  text-align: center;
+}
+
+.choices-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: 20px;
+}
+
+.choice-card {
+  display: block;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.choice-card:hover {
+  transform: translateY(-4px);
+  background: rgba(59,130,246,0.08);
+}
+
 
   </style>
 </head>
@@ -307,20 +339,28 @@
   </aside>
 
   <main class="main" id="content" role="main">
-    <section id="home" class="card">
-      <h2>Welcome</h2>
-      <p class="muted">This is a clean starting template with dark and light mode, and a sliding sidebar that includes a live date and time.</p>
-    </section>
+    <section id="home" class="home-choices">
+  <h2 class="section-title">Welcome</h2>
+  <p class="muted">Choose one of the options below to get started:</p>
 
-    <section id="features" class="card">
+  <div class="choices-grid">
+    <a href="#features" class="choice-card">
       <h3>Features</h3>
-      <ul>
-        <li>Dark / Light theme with saved preference</li>
-        <li>Animated hamburger that opens a sidebar</li>
-        <li>Live date and time in the sidebar</li>
-        <li>Responsive layout</li>
-      </ul>
-    </section>
+      <p>See what this template can do — responsive, dark mode, and more.</p>
+    </a>
+
+    <a href="#pricing" class="choice-card">
+      <h3>Pricing</h3>
+      <p>Check out the available plans and options for your needs.</p>
+    </a>
+
+    <a href="#contact" class="choice-card">
+      <h3>Contact</h3>
+      <p>Get in touch with us for more information or support.</p>
+    </a>
+  </div>
+</section>
+
 
     <section id="pricing" class="card">
       <h3>Pricing</h3>
