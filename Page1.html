@@ -8,12 +8,12 @@
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- ✅ Same CSS styles as index.html -->
+  <!-- ✅ Shared CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="light">
 
-  <!-- ✅ Navbar will be injected here -->
+  <!-- ✅ Shared Navbar -->
   <div id="navbar-container"></div>
 
   <main class="main" id="content" role="main">
@@ -22,17 +22,17 @@
       <p class="muted">Choose one of the options below to get started:</p>
 
       <div class="choices-grid">
-        <a href="#features" class="choice-card">
+        <a href="Page1.html#features" class="choice-card">
           <h3>Features</h3>
           <p>See what this template can do — responsive, dark mode, and more.</p>
         </a>
 
-        <a href="#pricing" class="choice-card">
+        <a href="Page1.html#pricing" class="choice-card">
           <h3>Pricing</h3>
           <p>Check out the available plans and options for your needs.</p>
         </a>
 
-        <a href="#contact" class="choice-card">
+        <a href="Page1.html#contact" class="choice-card">
           <h3>Contact</h3>
           <p>Get in touch with us for more information or support.</p>
         </a>
@@ -46,17 +46,17 @@
 
     <section id="pricing" class="card">
       <h3>Pricing</h3>
-      <p class="muted">Choose what suits your needs. This is just a placeholder section.</p>
+      <p class="muted">Pricing details go here.</p>
     </section>
 
     <section id="about" class="card">
       <h3>About</h3>
-      <p class="muted">Made as a minimal, modern starting point.</p>
+      <p class="muted">This is a minimal, modern starting point.</p>
     </section>
 
     <section id="contact" class="card">
       <h3>Contact</h3>
-      <p class="muted">Replace with your contact info or a contact form.</p>
+      <p class="muted">Replace with your contact info or form.</p>
     </section>
 
     <div class="footer">© Your Company</div>
@@ -69,7 +69,7 @@
       const html = await res.text();
       document.getElementById("navbar-container").innerHTML = html;
 
-      // Re-run navbar JS after injecting
+      // Run navbar.js after navbar is loaded
       const script = document.createElement("script");
       script.src = "navbar.js";
       document.body.appendChild(script);
