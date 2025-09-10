@@ -197,21 +197,24 @@ function updateSongCount(){
 }
 
 // Enhanced search: text + lyrics + tags
-searchInput.addEventListener('input', ()=>{
+searchInput.addEventListener('input', () => {
   const term = searchInput.value.toLowerCase();
-  cards.forEach(card=>{
-    const lyricText = card.dataset.lyric.toLowerCase();
+
+  cards.forEach(card => {
+    const id = card.dataset.id;
+    const lyricText = lyricsData[id] ? lyricsData[id].toLowerCase() : '';
     const cardText = card.textContent.toLowerCase();
-    if(term.startsWith('#')){ // search tagged
+
+    if (term.startsWith('#')) {
       const tagTerm = term.slice(1);
-      card.style.display = card.classList.contains('taged') && (cardText.includes(tagTerm) || lyricText.includes(tagTerm)) ? 'block' : 'none';
+      card.style.display = card.classList.contains('taged') && cardText.includes(tagTerm) ? 'block' : 'none';
     } else {
-      card.style.display = (cardText.includes(term) || lyricText.includes(term)) ? 'block' : 'none';
+      card.style.display = cardText.includes(term) || lyricText.includes(term) ? 'block' : 'none';
     }
   });
+
   updateSongCount();
 });
-
 updateSongCount();
 })();
 </script>
