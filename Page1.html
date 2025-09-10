@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* keep all your styles the same */
     :root{
       --bg: #ffffff;
       --card: #f6f7fb;
@@ -36,162 +35,484 @@
       font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       background:var(--bg);
       color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
+    /* Top navbar */
     .topbar{
       position:fixed;
-      top:0;left:0;right:0;
+      top:0;
+      left:0;
+      right:0;
       height:64px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       padding:0 18px;
+      gap:12px;
       background:linear-gradient(180deg, rgba(0,0,0,0.03), transparent);
       box-shadow:var(--shadow);
       z-index:40;
       backdrop-filter: blur(6px);
     }
 
-    .brand{ display:flex; align-items:center; gap:12px; }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
     .brand .logo {
-      width:44px; height:44px; border-radius:8px;
+      width:44px;
+      height:44px;
+      border-radius:8px;
       background:linear-gradient(135deg,var(--accent), #8b5cf6);
       box-shadow: 0 6px 18px rgba(59,130,246,0.12);
+      display:inline-block;
     }
-    .brand .title{ font-weight:600; }
+    .brand .title{
+      font-weight:600;
+      letter-spacing:0.2px;
+    }
 
-    .hamburger{ width:44px; height:44px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:transparent; border:none; cursor:pointer; padding:6px; }
-    .hamburger .bars{ position:relative; width:22px; height:16px; }
-    .hamburger .bars span{ position:absolute; left:0; right:0; height:2px; background:var(--text); border-radius:2px; transition:.28s; }
+    /* Hamburger (three bars) */
+    .hamburger{
+      width:44px;
+      height:44px;
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+      padding:6px;
+    }
+    .hamburger .bars{
+      position:relative;
+      width:22px;
+      height:16px;
+    }
+    .hamburger .bars span{
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      background:var(--text);
+      border-radius:2px;
+      transition: transform .28s ease, opacity .2s ease, top .28s ease, bottom .28s ease;
+    }
     .bars span:nth-child(1){ top:0; }
     .bars span:nth-child(2){ top:7px; }
     .bars span:nth-child(3){ top:14px; }
-    .hamburger.active .bars span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
-    .hamburger.active .bars span:nth-child(2){ opacity:0; }
-    .hamburger.active .bars span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
 
-    .top-controls{ display:flex; align-items:center; gap:12px; }
+    .hamburger.active .bars span:nth-child(1){
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.active .bars span:nth-child(2){
+      opacity:0;
+    }
+    .hamburger.active .bars span:nth-child(3){
+      transform: translateY(-7px) rotate(-45deg);
+    }
 
-    .btn{ border:1px solid rgba(0,0,0,0.06); background:var(--card); color:var(--text); padding:8px 12px; border-radius:8px; font-size:14px; cursor:pointer; }
-    [data-theme="dark"] .btn{ border:1px solid rgba(255,255,255,0.04); }
-
-    .theme-toggle{ display:inline-flex; align-items:center; gap:8px; padding:8px; border-radius:8px; background:transparent; border:none; cursor:pointer; }
-
-    /* search bar */
-    .search-form{
+    /* Controls on right */
+    .top-controls{
       display:flex;
       align-items:center;
-      gap:6px;
+      gap:12px;
     }
-    .search-input{
-      padding:6px 8px;
-      border-radius:6px;
-      border:1px solid rgba(0,0,0,0.1);
+
+    .btn {
+      border:1px solid rgba(0,0,0,0.06);
       background:var(--card);
       color:var(--text);
-      width:150px;
+      padding:8px 12px;
+      border-radius:8px;
+      font-size:14px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      box-shadow:var(--shadow);
     }
-    .search-btn{
-      padding:6px 10px;
+    [data-theme="dark"] .btn{
+      border:1px solid rgba(255,255,255,0.04);
+    }
+
+    .theme-toggle{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px;
+      border-radius:8px;
+      background:transparent;
       border:none;
-      border-radius:6px;
-      background:var(--accent);
-      color:white;
       cursor:pointer;
     }
 
-    .sidebar{ position:fixed; top:64px; left:0; bottom:0; width:280px; transform: translateX(-320px); transition:.32s; background:var(--sidebar); padding:20px; }
-    .sidebar.open{ transform:translateX(0); }
-    .menu{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
-    .menu a{ padding:10px 12px; border-radius:8px; color:var(--text); text-decoration:none; font-weight:500; }
-    .menu a:hover{ background: rgba(59,130,246,0.08); }
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      bottom: 0;
+      width: 280px;
+      transform: translateX(-320px);
+      transition: transform .32s cubic-bezier(.2,.9,.2,1);
+      background: var(--sidebar);
+      padding:20px;
+      box-shadow: 2px 0 18px rgba(2,6,23,0.06);
+      z-index:35;
+      overflow:auto;
+    }
+    .sidebar.open{
+      transform: translateX(0);
+    }
+    .sidebar .side-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .sidebar .menu{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .menu a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:8px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:500;
+      transition: background .15s ease, transform .06s ease;
+    }
+    .menu a:hover{
+      background: rgba(59,130,246,0.08);
+      transform: translateX(3px);
+    }
+    .muted { color: var(--muted); font-size:13px; }
 
-    .datetime{ margin-top:18px; padding:12px; border-radius:8px; background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent); }
-    .datetime .time{ font-size:20px; font-weight:700; }
-    .datetime .date{ margin-top:6px; font-size:13px; color:var(--muted); }
+    /* date/time box */
+    .datetime {
+      margin-top:18px;
+      padding:12px;
+      border-radius:8px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.02);
+    }
+    .datetime .time {
+      font-size:20px;
+      font-weight:700;
+      letter-spacing:0.6px;
+    }
+    .datetime .date {
+      margin-top:6px;
+      font-size:13px;
+      color:var(--muted);
+    }
 
-    .main{ padding:92px 24px 48px; max-width:1100px; margin:0 auto; }
-    .card{ background:var(--card); border-radius:12px; padding:18px; box-shadow:var(--shadow); margin-bottom:18px; }
+    /* Main content */
+    .main {
+      padding: 92px 24px 48px;
+      max-width:1100px;
+      margin:0 auto;
+    }
 
-    .footer{ text-align:center; color:var(--muted); font-size:13px; padding:24px 0; }
+    .card {
+      background: var(--card);
+      border-radius:12px;
+      padding:18px;
+      box-shadow: var(--shadow);
+      margin-bottom:18px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      padding:24px 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width:880px){
+      .sidebar { width:260px; }
+      .main { padding-left: 18px; padding-right: 18px; }
+      .brand .title { display:none; }
+    }
+    @media (max-width:560px){
+      .topbar{padding:0 12px;}
+      .btn{display:none;}
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .home-choices {
+      text-align: center;
+    }
+
+    .choices-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 20px;
+    }
+
+    .choice-card {
+      display: block;
+      background: var(--card);
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .choice-card:hover {
+      transform: translateY(-4px);
+      background: rgba(59,130,246,0.08);
+    }
   </style>
 </head>
 <body data-theme="light">
 
-  <header class="topbar">
+  <header class="topbar" role="banner">
     <div class="brand">
-      <button class="hamburger" id="hamburgerBtn"><span class="bars"><span></span><span></span><span></span></span></button>
-      <div class="logo"></div>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteSidebar">
+        <span class="bars" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+
+      <div class="logo" aria-hidden="true"></div>
       <div class="title">Clean Site</div>
     </div>
 
     <div class="top-controls">
-      <!-- ✅ Search form -->
-      <form class="search-form" onsubmit="return doSearch(event)">
-        <input type="text" class="search-input" id="searchQuery" placeholder="Search the web...">
-        <button type="submit" class="search-btn">Go</button>
+      <button class="btn" id="primaryAction">Primary Action</button>
+
+      <!-- 🔍 Search bar -->
+      <form class="search-form" onsubmit="return siteSearch(event)" style="display:flex;align-items:center;gap:6px;">
+        <input type="text" id="searchInput" placeholder="Search..."
+               style="padding:6px 8px;border-radius:6px;border:1px solid rgba(0,0,0,0.1);
+                      background:var(--card);color:var(--text);width:150px;">
+        <button type="submit"
+                style="padding:6px 10px;border:none;border-radius:6px;
+                       background:var(--accent);color:white;cursor:pointer;">
+          Go
+        </button>
       </form>
 
-      <button class="btn">Primary Action</button>
-
-      <button class="theme-toggle" id="themeToggle">Dark/Light</button>
+      <button class="theme-toggle" id="themeToggle" aria-pressed="false" title="Toggle theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"></circle>
+        </svg>
+        <span class="muted">Toggle theme</span>
+      </button>
     </div>
   </header>
 
-  <aside id="siteSidebar" class="sidebar">
-    <ul class="menu">
-      <li><a href="#home">Home</a></li>
-      <li><a href="Page1.html">Page One</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-    <div class="datetime">
+  <aside id="siteSidebar" class="sidebar" aria-hidden="true" aria-labelledby="hamburgerBtn">
+    <div class="side-brand">
+      <div class="logo" style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent), #8b5cf6)"></div>
+      <div>
+        <div style="font-weight:700">Menu</div>
+        <div class="muted" style="font-size:13px">Select One</div>
+      </div>
+    </div>
+
+    <nav>
+      <ul class="menu" role="menu">
+        <li role="none"><a role="menuitem" href="#home">Home</a></li>
+        <li role="none"><a role="menuitem" href="#features">Features</a></li>
+        <li role="none"><a role="menuitem" href="#Page1.html">Genres</a></li>
+        <li role="none"><a role="menuitem" href="#about">About</a></li>
+        <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="datetime" aria-live="polite">
       <div class="time" id="clock">00:00:00</div>
-      <div class="date" id="dateText">Loading...</div>
+      <div class="date" id="dateText">Loading date...</div>
     </div>
   </aside>
 
-  <main class="main" id="content">
-    <h2>Welcome</h2>
-    <p>Choose one of the options below:</p>
-    <div class="choices-grid">
-      <a href="Page1.html" class="choice-card"><h3>Features</h3><p>Check features here.</p></a>
-      <a href="Page1.html" class="choice-card"><h3>Pricing</h3><p>Plans and options.</p></a>
-      <a href="Page1.html" class="choice-card"><h3>Contact</h3><p>Get in touch.</p></a>
-    </div>
+  <main class="main" id="content" role="main">
+    <section id="home" class="home-choices">
+      <h2 class="section-title">Welcome</h2>
+      <p class="muted">Choose one of the options below to get started:</p>
+
+      <div class="choices-grid">
+        <a href="Page1.html" class="choice-card">
+          <h3>Features</h3>
+          <p>See what this template can do — responsive, dark mode, and more.</p>
+        </a>
+
+        <a href="Page1.html" class="choice-card">
+          <h3>Pricing</h3>
+          <p>Check out the available plans and options for your needs.</p>
+        </a>
+
+        <a href="Page1.html" class="choice-card">
+          <h3>Contact</h3>
+          <p>Get in touch with us for more information or support.</p>
+        </a>
+      </div>
+    </section>
+
     <div class="footer">© Your Company</div>
   </main>
 
   <script>
-    // search function
-    function doSearch(e){
-      e.preventDefault();
-      const q = document.getElementById('searchQuery').value;
-      if(q.trim()!==""){
-        window.open("https://www.google.com/search?q="+encodeURIComponent(q)," _blank");
+    (function(){
+      // Theme toggle with persistence
+      const body = document.body;
+      const toggle = document.getElementById('themeToggle');
+      const userPref = localStorage.getItem('site-theme');
+
+      function applyTheme(theme){
+        body.setAttribute('data-theme', theme);
+        toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
       }
-      return false;
-    }
 
-    // sidebar toggle
-    const hamburger=document.getElementById('hamburgerBtn');
-    const sidebar=document.getElementById('siteSidebar');
-    hamburger.addEventListener('click',()=>{ sidebar.classList.toggle('open'); hamburger.classList.toggle('active'); });
+      if(userPref){
+        applyTheme(userPref);
+      } else {
+        // default to system preference
+        const preferDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(preferDark ? 'dark' : 'light');
+      }
 
-    // theme toggle
-    const body=document.body; 
-    document.getElementById('themeToggle').addEventListener('click',()=>{
-      const isDark=body.getAttribute('data-theme')==='dark';
-      body.setAttribute('data-theme',isDark?'light':'dark');
-    });
+      toggle.addEventListener('click', () => {
+        const current = body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        const next = current === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        localStorage.setItem('site-theme', next);
+      });
 
-    // live clock
-    const clock=document.getElementById('clock');
-    const dateText=document.getElementById('dateText');
-    setInterval(()=>{
-      const now=new Date();
-      clock.textContent=now.toLocaleTimeString();
-      dateText.textContent=now.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-    },1000);
+      // Sidebar open/close and hamburger animation
+      const hamburger = document.getElementById('hamburgerBtn');
+      const sidebar = document.getElementById('siteSidebar');
+      function openSidebar(){
+        sidebar.classList.add('open');
+        sidebar.setAttribute('aria-hidden','false');
+        hamburger.classList.add('active');
+        hamburger.setAttribute('aria-expanded','true');
+      }
+      function closeSidebar(){
+        sidebar.classList.remove('open');
+        sidebar.setAttribute('aria-hidden','true');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded','false');
+      }
+
+      hamburger.addEventListener('click', () => {
+        if(sidebar.classList.contains('open')) closeSidebar();
+        else openSidebar();
+      });
+
+      // Close sidebar when clicking outside on small screens
+      document.addEventListener('click', (e) => {
+        if(!sidebar.classList.contains('open')) return;
+        const inside = sidebar.contains(e.target) || hamburger.contains(e.target);
+        if(!inside && window.innerWidth < 900) closeSidebar();
+      });
+
+      // Keyboard accessibility: Esc closes sidebar
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
+      });
+
+      // Live clock and date
+      const clockEl = document.getElementById('clock');
+      const dateEl = document.getElementById('dateText');
+
+      function pad(n){ return n < 10 ? '0'+n : n; }
+
+      function updateDateTime(){
+        const now = new Date();
+        const hours = pad(now.getHours());
+        const minutes = pad(now.getMinutes());
+        const seconds = pad(now.getSeconds());
+        clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+
+        // Format: Weekday, DD Month YYYY
+        const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.textContent = now.toLocaleDateString(undefined, opts);
+      }
+
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+
+      // Smooth scroll for sidebar nav links
+      const navLinks = sidebar.querySelectorAll('a[href^="#"]');
+      navLinks.forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = a.getAttribute('href').slice(1);
+          const target = document.getElementById(id);
+          if(target){
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+            // close sidebar on small screens
+            if(window.innerWidth < 900) closeSidebar();
+          }
+        });
+      });
+
+      // --- Internal Site Search ---
+      window.siteSearch = function(e){
+        e.preventDefault();
+        const query = document.getElementById("searchInput").value.toLowerCase().trim();
+        if(!query) return false;
+
+        // remove old highlights
+        document.querySelectorAll(".highlight").forEach(el=>{
+          el.outerHTML = el.innerText;
+        });
+
+        // search inside #content
+        const content = document.getElementById("content");
+        const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, null, false);
+        let found = false;
+
+        while(walker.nextNode()){
+          const node = walker.currentNode;
+          const text = node.nodeValue;
+          const idx = text.toLowerCase().indexOf(query);
+          if(idx !== -1){
+            found = true;
+            const span = document.createElement("span");
+            span.className = "highlight";
+            span.style.background = "yellow";
+            span.style.color = "black";
+            span.textContent = text.substr(idx, query.length);
+
+            const after = node.splitText(idx);
+            after.nodeValue = after.nodeValue.substring(query.length);
+            node.parentNode.insertBefore(span, after);
+          }
+        }
+
+        if(!found){
+          alert("No results found for: " + query);
+        } else {
+          const first = document.querySelector(".highlight");
+          if(first) first.scrollIntoView({behavior:"smooth", block:"center"});
+        }
+        return false;
+      }
+    })();
   </script>
 </body>
 </html>
