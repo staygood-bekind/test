@@ -1,420 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Clean Site — Dark / Light + Sidebar + Live Filter</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Lyric Site — Dark / Light + Sidebar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Google font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg: #ffffff;
-      --card: #f6f7fb;
-      --text: #111827;
-      --muted:#666d75;
-      --accent: #3b82f6;
-      --sidebar: #fafbff;
-      --shadow: 0 6px 20px rgba(16,24,40,0.08);
-    }
-
-    [data-theme="dark"]{
-      --bg: #0b1016;
-      --card: #081018;
-      --text: #e6eef8;
-      --muted:#9aa6b4;
-      --accent: #60a5fa;
-      --sidebar: #06101a;
-      --shadow: 0 8px 30px rgba(2,6,23,0.6);
-    }
-
-    html,body{
-      height:100%;
-      margin:0;
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:var(--bg);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    /* Top navbar */
-    .topbar{
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      height:64px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 18px;
-      gap:12px;
-      background:linear-gradient(180deg, rgba(0,0,0,0.03), transparent);
-      box-shadow:var(--shadow);
-      z-index:40;
-      backdrop-filter: blur(6px);
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    .brand .logo {
-      width:44px;
-      height:44px;
-      border-radius:8px;
-      background:linear-gradient(135deg,var(--accent), #8b5cf6);
-      box-shadow: 0 6px 18px rgba(59,130,246,0.12);
-      display:inline-block;
-    }
-    .brand .title{
-      font-weight:600;
-      letter-spacing:0.2px;
-    }
-
-    /* Hamburger */
-    .hamburger{
-      width:44px;
-      height:44px;
-      border-radius:8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:transparent;
-      border:none;
-      cursor:pointer;
-      padding:6px;
-    }
-    .hamburger .bars{
-      position:relative;
-      width:22px;
-      height:16px;
-    }
-    .hamburger .bars span{
-      position:absolute;
-      left:0;
-      right:0;
-      height:2px;
-      background:var(--text);
-      border-radius:2px;
-      transition: transform .28s ease, opacity .2s ease, top .28s ease, bottom .28s ease;
-    }
-    .bars span:nth-child(1){ top:0; }
-    .bars span:nth-child(2){ top:7px; }
-    .bars span:nth-child(3){ top:14px; }
-
-    .hamburger.active .bars span:nth-child(1){
-      transform: translateY(7px) rotate(45deg);
-    }
-    .hamburger.active .bars span:nth-child(2){
-      opacity:0;
-    }
-    .hamburger.active .bars span:nth-child(3){
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    /* Controls on right */
-    .top-controls{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .btn {
-      border:1px solid rgba(0,0,0,0.06);
-      background:var(--card);
-      color:var(--text);
-      padding:8px 12px;
-      border-radius:8px;
-      font-size:14px;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:var(--shadow);
-    }
-    [data-theme="dark"] .btn{
-      border:1px solid rgba(255,255,255,0.04);
-    }
-
-    .theme-toggle{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px;
-      border-radius:8px;
-      background:transparent;
-      border:none;
-      cursor:pointer;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 64px;
-      left: 0;
-      bottom: 0;
-      width: 280px;
-      transform: translateX(-320px);
-      transition: transform .32s cubic-bezier(.2,.9,.2,1);
-      background: var(--sidebar);
-      padding:20px;
-      box-shadow: 2px 0 18px rgba(2,6,23,0.06);
-      z-index:35;
-      overflow:auto;
-    }
-    .sidebar.open{
-      transform: translateX(0);
-    }
-    .sidebar .side-brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:18px;
-    }
-    .sidebar .menu{
-      list-style:none;
-      padding:0;
-      margin:0;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    .menu a{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:8px;
-      color:var(--text);
-      text-decoration:none;
-      font-weight:500;
-      transition: background .15s ease, transform .06s ease;
-    }
-    .menu a:hover{
-      background: rgba(59,130,246,0.08);
-      transform: translateX(3px);
-    }
-    .muted { color: var(--muted); font-size:13px; }
-
-    .datetime {
-      margin-top:18px;
-      padding:12px;
-      border-radius:8px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
-      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.02);
-    }
-    .datetime .time { font-size:20px; font-weight:700; letter-spacing:0.6px; }
-    .datetime .date { margin-top:6px; font-size:13px; color:var(--muted); }
-
-    .main { padding: 92px 24px 48px; max-width:1100px; margin:0 auto; }
-    .card { background: var(--card); border-radius:12px; padding:18px; box-shadow: var(--shadow); margin-bottom:18px; }
-    .footer { text-align:center; color:var(--muted); font-size:13px; padding:24px 0; }
-
-    @media (max-width:880px){
-      .sidebar { width:260px; }
-      .main { padding-left: 18px; padding-right: 18px; }
-      .brand .title { display:none; }
-    }
-    @media (max-width:560px){
-      .topbar{padding:0 12px;}
-      .btn{display:none;}
-    }
-
-    .section-title { text-align: center; margin-bottom: 12px; }
-    .home-choices { text-align: center; }
-    .choices-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 20px; }
-    .choice-card { display: block; background: var(--card); border-radius: 12px; padding: 20px; text-decoration: none; color: var(--text); box-shadow: var(--shadow); transition: transform 0.2s ease, background 0.2s ease; cursor:pointer; }
-    .choice-card:hover { transform: translateY(-4px); background: rgba(59,130,246,0.08); }
-
-    .lyrics-list { list-style:none; padding-left:0; margin-top:12px; text-align:left; }
-    .lyrics-list li { margin-bottom:6px; }
-    .lyrics-list li a { color:var(--accent); text-decoration:none; cursor:pointer; }
-    .lyrics-list li a:hover { text-decoration:underline; }
-  </style>
+<style>
+:root{
+--bg: #ffffff; --card: #f6f7fb; --text: #111827; --muted:#666d75;
+--accent: #3b82f6; --sidebar: #fafbff; --shadow: 0 6px 20px rgba(16,24,40,0.08);
+}
+[data-theme="dark"]{
+--bg: #0b1016; --card: #081018; --text: #e6eef8; --muted:#9aa6b4;
+--accent: #60a5fa; --sidebar: #06101a; --shadow: 0 8px 30px rgba(2,6,23,0.6);
+}
+html,body{height:100%;margin:0;font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+.topbar{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;
+padding:0 18px;gap:12px;background:linear-gradient(180deg, rgba(0,0,0,0.03), transparent);box-shadow:var(--shadow);z-index:40;backdrop-filter: blur(6px);}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand .logo {width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent), #8b5cf6);
+box-shadow:0 6px 18px rgba(59,130,246,0.12);}
+.brand .title{font-weight:600;letter-spacing:0.2px;}
+.hamburger{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;padding:6px;}
+.hamburger .bars{position:relative;width:22px;height:16px;}
+.hamburger .bars span{position:absolute;left:0;right:0;height:2px;background:var(--text);border-radius:2px;transition: transform .28s ease, opacity .2s ease, top .28s ease, bottom .28s ease;}
+.bars span:nth-child(1){ top:0; }
+.bars span:nth-child(2){ top:7px; }
+.bars span:nth-child(3){ top:14px; }
+.hamburger.active .bars span:nth-child(1){ transform: translateY(7px) rotate(45deg);}
+.hamburger.active .bars span:nth-child(2){ opacity:0;}
+.hamburger.active .bars span:nth-child(3){ transform: translateY(-7px) rotate(-45deg);}
+.top-controls{display:flex;align-items:center;gap:12px;}
+.btn{border:1px solid rgba(0,0,0,0.06);background:var(--card);color:var(--text);padding:8px 12px;border-radius:8px;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--shadow);}
+[data-theme="dark"] .btn{border:1px solid rgba(255,255,255,0.04);}
+.theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:8px;background:transparent;border:none;cursor:pointer;}
+.sidebar{position: fixed;top: 64px;left: 0;bottom: 0;width: 280px;transform: translateX(-320px);transition: transform .32s cubic-bezier(.2,.9,.2,1);background: var(--sidebar);padding:20px;box-shadow: 2px 0 18px rgba(2,6,23,0.06);z-index:35;overflow:auto;}
+.sidebar.open{transform: translateX(0);}
+.sidebar .side-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.sidebar .menu{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;}
+.menu a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;color:var(--text);text-decoration:none;font-weight:500;transition: background .15s ease, transform .06s ease;}
+.menu a:hover{background: rgba(59,130,246,0.08);transform: translateX(3px);}
+.muted { color: var(--muted); font-size:13px; }
+.datetime{margin-top:18px;padding:12px;border-radius:8px;background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);box-shadow: inset 0 -1px 0 rgba(0,0,0,0.02);}
+.datetime .time{font-size:20px;font-weight:700;letter-spacing:0.6px;}
+.datetime .date{margin-top:6px;font-size:13px;color:var(--muted);}
+.main{padding: 92px 24px 48px;max-width:1100px;margin:0 auto;}
+.section-title{text-align: center;margin-bottom: 12px;}
+#songCount{margin: 10px 0;font-weight:600;}
+#searchInput{display:block;margin: 12px auto 24px;padding: 10px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);width: 80%;max-width:400px;font-size:14px;}
+.home-choices{text-align:center;}
+.choices-grid{display: grid;gap: 20px;grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));margin-top: 20px;}
+.choice-card{display: block;background: var(--card);border-radius: 12px;padding: 20px;text-decoration: none;color: var(--text);box-shadow: var(--shadow);transition: transform 0.2s ease, background 0.2s ease;cursor:pointer;}
+.choice-card:hover{transform: translateY(-4px);background: rgba(59,130,246,0.08);}
+.choice-card h3{margin:0 0 8px 0;}
+.choice-card p{margin:2px 0;font-size:13px;color:var(--muted);}
+.choice-card.taged{border:2px solid var(--accent);}
+.footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 0;}
+#lyricModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background: rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:50;}
+#lyricModalContent{background: var(--card);color: var(--text);padding:24px;border-radius:12px;max-width:600px;width:90%;max-height:80%;overflow:auto;position:relative;}
+#closeModal{position:absolute;top:12px;right:12px;border:none;background:transparent;font-size:24px;cursor:pointer;}
+@media (max-width:880px){.sidebar { width:260px; }.main { padding-left: 18px; padding-right: 18px; }.brand .title { display:none; }}
+@media (max-width:560px){.topbar{padding:0 12px;}.btn{display:none;}}
+</style>
 </head>
+
 <body data-theme="light">
+<header class="topbar">
+  <div class="brand">
+    <button class="hamburger" id="hamburgerBtn"><span class="bars"><span></span><span></span><span></span></span></button>
+    <div class="logo"></div>
+    <div class="title">Lyric Site</div>
+  </div>
+  <div class="top-controls">
+    <button class="btn" id="primaryAction">Primary Action</button>
+    <button class="theme-toggle" id="themeToggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"></circle>
+      </svg>
+    </button>
+  </div>
+</header>
 
-  <!-- Topbar -->
-  <header class="topbar" role="banner">
-    <div class="brand">
-      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteSidebar">
-        <span class="bars" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-      </button>
-      <span class="logo"></span>
-      <span class="title">CleanSite</span>
+<aside id="siteSidebar" class="sidebar">
+  <div class="side-brand">
+    <div class="logo" style="width:36px;height:36px;"></div>
+    <div><div style="font-weight:700">Menu</div><div class="muted" style="font-size:13px">Select One</div></div>
+  </div>
+  <nav><ul class="menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#lyrics">Lyrics</a></li>
+  </ul></nav>
+  <div class="datetime">
+    <div class="time" id="clock">00:00:00</div>
+    <div class="date" id="dateText">Loading date...</div>
+  </div>
+</aside>
+
+<main class="main">
+<section id="home" class="home-choices">
+  <h2 class="section-title">Welcome to Lyric Site</h2>
+  <div id="songCount">Songs: 0</div>
+  <input type="text" id="searchInput" placeholder="Search lyrics, songs or tags..." />
+
+  <div class="choices-grid" id="lyricsGrid">
+    <div class="choice-card" data-lyric="Imagine all the people living life in peace..." data-genre="Pop" data-date="1971-10-11" data-author="John Lennon" data-album="Imagine">
+      <h3>Imagine</h3>
+      <p>By: John Lennon</p>
+      <p>Album: Imagine</p>
+      <p>Genre: Pop</p>
+      <p>Date: 1971-10-11</p>
     </div>
-
-    <div class="top-controls">
-      <button class="theme-toggle" id="themeToggle">🌙</button>
-      <button class="btn">Settings</button>
+    <div class="choice-card taged" data-lyric="Is this the real life? Is this just fantasy?" data-genre="Rock" data-date="1975-10-31" data-author="Queen" data-album="A Night at the Opera">
+      <h3>Bohemian Rhapsody</h3>
+      <p>By: Queen</p>
+      <p>Album: A Night at the Opera</p>
+      <p>Genre: Rock</p>
+      <p>Date: 1975-10-31</p>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- Sidebar -->
-  <aside class="sidebar" id="siteSidebar">
-    <div class="side-brand">
-      <span class="logo"></span>
-      <span class="title">CleanSite</span>
-    </div>
-    <ul class="menu">
-      <li><a href="#Personal">Personal</a></li>
-      <li><a href="#Group">Group</a></li>
-      <li><a href="#">Pricing</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <div class="datetime">
-      <div class="time" id="clock">--:--</div>
-      <div class="date" id="date">-- --- ----</div>
-    </div>
-  </aside>
+<div class="footer">© Your Company</div>
+</main>
 
-  <!-- Main Content -->
-  <main class="main">
-    <h2 class="section-title">Lyrics Library</h2>
+<!-- Modal -->
+<div id="lyricModal">
+  <div id="lyricModalContent">
+    <button id="closeModal">&times;</button>
+    <h3 id="modalTitle"></h3>
+    <p id="modalContent"></p>
+    <button id="tagBtn" class="btn">Tag/Untag</button>
+  </div>
+</div>
 
-    <!-- Search Bar -->
-    <div style="margin:20px 0; text-align:center;">
-      <input type="text" id="lyricSearch" placeholder="Search lyrics or cards..." style="padding:8px 12px; width:250px; border-radius:8px; border:1px solid #ccc; font-size:14px;">
-    </div>
+<script>
+(function(){
+const body = document.body;
+const toggle = document.getElementById('themeToggle');
+const userPref = localStorage.getItem('site-theme');
+if(userPref) body.setAttribute('data-theme', userPref);
+toggle.addEventListener('click', ()=>{ 
+  const next = body.getAttribute('data-theme')==='dark'?'light':'dark';
+  body.setAttribute('data-theme', next);
+  localStorage.setItem('site-theme', next);
+});
 
-    <div class="home-choices">
-      <div class="choices-grid" id="Personal">
-        <div class="choice-card"><h3>Ane</h3></div>
-        <div class="choice-card"><h3>Nsu</h3></div>
-        <div class="choice-card"><h3>Nsa</h3></div>
-      </div>
-    </div>
-  </main>
+const hamburger = document.getElementById('hamburgerBtn');
+const sidebar = document.getElementById('siteSidebar');
+hamburger.addEventListener('click',()=>{sidebar.classList.toggle('open'); hamburger.classList.toggle('active');});
+document.addEventListener('click', e=>{if(!sidebar.contains(e.target)&&!hamburger.contains(e.target)&&sidebar.classList.contains('open')&&window.innerWidth<900){sidebar.classList.remove('open');hamburger.classList.remove('active');}});
+document.addEventListener('keydown', e=>{if(e.key==='Escape') sidebar.classList.remove('open');});
 
+const clockEl = document.getElementById('clock');
+const dateEl = document.getElementById('dateText');
+function pad(n){return n<10?'0'+n:n;}
+function updateDateTime(){const now=new Date();clockEl.textContent=`${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`; const opts={weekday:'long',year:'numeric',month:'long',day:'numeric'};dateEl.textContent=now.toLocaleDateString(undefined,opts);}
+updateDateTime(); setInterval(updateDateTime,1000);
 
-  <main class="main">
-    <h2 class="section-title">Lyrics Library</h2>
+const cards = document.querySelectorAll('.choice-card');
+const lyricModal = document.getElementById('lyricModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalContent = document.getElementById('modalContent');
+const closeModal = document.getElementById('closeModal');
+const tagBtn = document.getElementById('tagBtn');
+let currentCard=null;
 
-    <!-- Search Bar -->
-    <div style="margin:20px 0; text-align:center;">
-      <input type="text" id="lyricSearch" placeholder="Search lyrics or cards..." style="padding:8px 12px; width:250px; border-radius:8px; border:1px solid #ccc; font-size:14px;">
-    </div>
+cards.forEach(card=>{
+  card.addEventListener('click', ()=>{
+    currentCard=card;
+    modalTitle.textContent = card.querySelector('h3').textContent;
+    modalContent.textContent = card.dataset.lyric;
+    lyricModal.style.display = 'flex';
+    tagBtn.textContent = card.classList.contains('taged')?'Untag':'Tag';
+  });
+});
 
-    <div class="home-choices">
-      <div class="choices-grid" id="Group">
-        <div class="choice-card"><h3>GAne</h3></div>
-        <div class="choice-card"><h3>GNsu</h3></div>
-        <div class="choice-card"><h3>GNsa</h3></div>
-      </div>
-    </div>
-  </main>
+closeModal.addEventListener('click', ()=>lyricModal.style.display='none');
+lyricModal.addEventListener('click', e=>{if(e.target===lyricModal) lyricModal.style.display='none';});
 
-  <footer class="footer">© 2025 CleanSite. All rights reserved.</footer>
+tagBtn.addEventListener('click', ()=>{
+  if(!currentCard) return;
+  currentCard.classList.toggle('taged');
+  tagBtn.textContent = currentCard.classList.contains('taged')?'Untag':'Tag';
+  updateSongCount();
+});
 
-  <script>
-    // Sidebar toggle
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const sidebar = document.getElementById('siteSidebar');
-    hamburgerBtn.addEventListener('click',()=>{
-      hamburgerBtn.classList.toggle('active');
-      sidebar.classList.toggle('open');
-    });
+const searchInput = document.getElementById('searchInput');
+const songCount = document.getElementById('songCount');
 
-    // Theme toggle
-    const themeBtn = document.getElementById('themeToggle');
-    themeBtn.addEventListener('click',()=>{
-      const body = document.body;
-      if(body.getAttribute('data-theme')==='light'){
-        body.setAttribute('data-theme','dark');
-        themeBtn.textContent='☀️';
-      }else{
-        body.setAttribute('data-theme','light');
-        themeBtn.textContent='🌙';
-      }
-    });
+function updateSongCount(){
+  const visible = Array.from(cards).filter(c=>c.style.display!=='none');
+  songCount.textContent = 'Songs: '+visible.length;
+}
 
-    // Clock
-    function updateClock(){
-      const now = new Date();
-      document.getElementById('clock').textContent = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-      document.getElementById('date').textContent = now.toLocaleDateString([], {day:'2-digit',month:'short',year:'numeric'});
+// Enhanced search: text + lyrics + tags
+searchInput.addEventListener('input', ()=>{
+  const term = searchInput.value.toLowerCase();
+  cards.forEach(card=>{
+    const lyricText = card.dataset.lyric.toLowerCase();
+    const cardText = card.textContent.toLowerCase();
+    if(term.startsWith('#')){ // search tagged
+      const tagTerm = term.slice(1);
+      card.style.display = card.classList.contains('taged') && (cardText.includes(tagTerm) || lyricText.includes(tagTerm)) ? 'block' : 'none';
+    } else {
+      card.style.display = (cardText.includes(term) || lyricText.includes(term)) ? 'block' : 'none';
     }
-    setInterval(updateClock,1000);
-    updateClock();
+  });
+  updateSongCount();
+});
 
-    // --- Lyrics library ---
-    const lyricsLibrary = {
-      lyric1: "አንታይ እሞ ክብል የ",
-      lyric2: "ዘልኣለም",
-      lyric3: "Lyric 3 for Pricing",
-      lyric4: "Lyric 4 for Pricing",
-      lyric5: "Lyric 5 for Pricing",
-      lyric6: "Lyric 6 for Pricing",
-      lyric7: "Lyric 7 for Contact",
-      lyric8: "Lyric 8 for Contact",
-      lyric9: "Lyric 9 for Contact",
-      lyric10: "Lyric 10 for Contact"
-    };
+updateSongCount();
+})();
+</script>
 
-    const cardLyrics = {
-      features: ["lyric1","lyric2","lyric3","lyric4"],
-      pricing: ["lyric3","lyric4","lyric5","lyric6"],
-      contact: ["lyric1","lyric7","lyric8","lyric9","lyric10"]
-    };
-
-    const cardsGrid = document.getElementById('choicesGrid');
-
-    // Create lyrics lists inside cards
-    document.querySelectorAll('.choice-card').forEach(card=>{
-      const title = card.querySelector('h3').textContent.toLowerCase();
-      const list = document.createElement('ul');
-      list.className = 'lyrics-list';
-      list.style.display='none';
-      const ids = cardLyrics[title] || [];
-      ids.forEach(id=>{
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href='#';
-        a.textContent = lyricsLibrary[id];
-        a.className='lyric-link';
-        li.appendChild(a);
-        list.appendChild(li);
-      });
-      card.appendChild(list);
-
-      card.addEventListener('click', ()=>{
-        list.style.display = list.style.display === 'block' ? 'none' : 'block';
-      });
-    });
-
-    // Live search filter for cards and lyrics
-    const searchInput = document.getElementById('lyricSearch');
-    searchInput.addEventListener('input', function(){
-      const term = this.value.toLowerCase();
-      document.querySelectorAll('.choice-card').forEach(card=>{
-        const lyrics = Array.from(card.querySelectorAll('.lyrics-list li')).map(li=>li.textContent.toLowerCase());
-        const cardTitle = card.querySelector('h3').textContent.toLowerCase();
-        // Filter lyrics inside card
-        let hasMatch = false;
-        card.querySelectorAll('.lyrics-list li').forEach(li=>{
-          if(li.textContent.toLowerCase().includes(term)){
-            li.style.display='list-item';
-            hasMatch=true;
-          }else{
-            li.style.display='none';
-          }
-        });
-        // Show card if title or any lyric matches
-        if(cardTitle.includes(term) || hasMatch){
-          card.style.display='block';
-        }else{
-          card.style.display='none';
-        }
-      });
-    });
-  </script>
 </body>
 </html>
