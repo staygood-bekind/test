@@ -1,0 +1,112 @@
+/* ========== GLOBAL STYLES ========== */
+:root {
+  --bg-light: #f9f9f9;
+  --text-light: #222;
+  --bg-dark: #121212;
+  --text-dark: #f1f1f1;
+  --accent: #007bff;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Light mode */
+body[data-theme="light"] {
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+/* Dark mode */
+body[data-theme="dark"] {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* ========== NAVBAR ========== */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: var(--accent);
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.site-header .logo {
+  font-weight: bold;
+}
+
+.site-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+}
+
+/* ========== HAMBURGER ICON ========== */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: white;
+  display: block;
+}
+
+/* ========== SIDEBAR ========== */
+.site-sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 250px;
+  height: 100%;
+  background: #333;
+  color: white;
+  transition: left 0.3s ease-in-out;
+  padding: 20px;
+  z-index: 999;
+}
+
+.site-sidebar.open {
+  left: 0;
+}
+
+.site-sidebar nav a {
+  display: block;
+  padding: 10px 0;
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.site-sidebar nav a:hover {
+  background: #444;
+}
+
+/* ========== CLOCK ========== */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #555;
+  text-align: center;
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* ========== PAGE CONTENT ========== */
+main {
+  margin-top: 60px; /* space for fixed navbar */
+  padding: 20px;
+}
