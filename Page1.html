@@ -105,13 +105,13 @@ box-shadow:0 6px 18px rgba(59,130,246,0.12);}
   <input type="text" id="searchInput" placeholder="Search lyrics, songs or tags..." />
 
   <div class="choices-grid" id="lyricsGrid">
-    <div class="choice-card" data-lyric="Imagine all the people living life in peace..." data-genre="Pop" data-date="1971-10-11" data-author="John Lennon" data-album="Imagine">
-      <h3>Imagine</h3>
-      <p>By: John Lennon</p>
-      <p>Album: Imagine</p>
-      <p>Genre: Pop</p>
-      <p>Date: 1971-10-11</p>
-    </div>
+  <div class="choice-card" data-id="song1" data-genre="Pop" data-date="1971-10-11" data-author="John Lennon" data-album="Imagine">
+    <h3>Imagine</h3>
+    <p>By: John Lennon</p>
+    <p>Album: Imagine</p>
+    <p>Genre: Pop</p>
+    <p>Date: 1971-10-11</p>
+  </div>
     <div class="choice-card taged" data-lyric="Is this the real life? Is this just fantasy?" data-genre="Rock" data-date="1975-10-31" data-author="Queen" data-album="A Night at the Opera">
       <h3>Bohemian Rhapsody</h3>
       <p>By: Queen</p>
@@ -167,13 +167,14 @@ const closeModal = document.getElementById('closeModal');
 const tagBtn = document.getElementById('tagBtn');
 let currentCard=null;
 
-cards.forEach(card=>{
-  card.addEventListener('click', ()=>{
-    currentCard=card;
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    currentCard = card;
+    const id = card.dataset.id; // Use data-id
     modalTitle.textContent = card.querySelector('h3').textContent;
-    modalContent.textContent = card.dataset.lyric;
+    modalContent.textContent = lyricsData[id]; // Fetch full lyric from lyrics.js
     lyricModal.style.display = 'flex';
-    tagBtn.textContent = card.classList.contains('taged')?'Untag':'Tag';
+    tagBtn.textContent = card.classList.contains('taged') ? 'Untag' : 'Tag';
   });
 });
 
@@ -214,6 +215,9 @@ searchInput.addEventListener('input', ()=>{
 updateSongCount();
 })();
 </script>
+
+  <script src="lyrics.js"></script>
+<script src="main.js"></script>
 
 </body>
 </html>
