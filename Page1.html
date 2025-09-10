@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Clean Site — Dark / Light + Sidebar</title>
+  <title>Clean Site — Dark / Light + Sidebar + Live Filter</title>
 
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -234,273 +234,187 @@
     .lyrics-list li { margin-bottom:6px; }
     .lyrics-list li a { color:var(--accent); text-decoration:none; cursor:pointer; }
     .lyrics-list li a:hover { text-decoration:underline; }
-
   </style>
 </head>
 <body data-theme="light">
 
+  <!-- Topbar -->
   <header class="topbar" role="banner">
     <div class="brand">
       <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteSidebar">
         <span class="bars" aria-hidden="true">
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </span>
       </button>
-      <div class="logo" aria-hidden="true"></div>
-      <div class="title">Clean Site</div>
+      <span class="logo"></span>
+      <span class="title">CleanSite</span>
     </div>
 
     <div class="top-controls">
-      <button class="btn" id="primaryAction">Primary Action</button>
-      <button class="theme-toggle" id="themeToggle" aria-pressed="false" title="Toggle theme">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"></circle>
-        </svg>
-        <span class="muted">Toggle theme</span>
-      </button>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+      <button class="btn">Settings</button>
     </div>
   </header>
 
-  <aside id="siteSidebar" class="sidebar" aria-hidden="true" aria-labelledby="hamburgerBtn">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="siteSidebar">
     <div class="side-brand">
-      <div class="logo" style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent), #8b5cf6)"></div>
-      <div>
-        <div style="font-weight:700">Menu</div>
-        <div class="muted" style="font-size:13px">Select One</div>
-      </div>
+      <span class="logo"></span>
+      <span class="title">CleanSite</span>
     </div>
-
-    <nav>
-      <ul class="menu" role="menu">
-        <li role="none"><a role="menuitem" href="#home">Home</a></li>
-        <li role="none"><a role="menuitem" href="#pricing">Pricing</a></li>
-        <li role="none"><a role="menuitem" href="#features">Features</a></li>
-        <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-
-    <div class="datetime" aria-live="polite">
-      <div class="time" id="clock">00:00:00</div>
-      <div class="date" id="dateText">Loading date...</div>
+    <ul class="menu">
+      <li><a href="#Personal">Personal</a></li>
+      <li><a href="#Group">Group</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="datetime">
+      <div class="time" id="clock">--:--</div>
+      <div class="date" id="date">-- --- ----</div>
     </div>
   </aside>
 
-  <main class="main" id="content" role="main">
-    <section id="home" class="home-choices">
-      <h2 class="section-title">Welcome</h2>
-      <p class="muted">Choose one of the options below to get started:</p>
+  <!-- Main Content -->
+  <main class="main">
+    <h2 class="section-title">Lyrics Library</h2>
 
-      <div class="choices-grid">
-        <div class="choice-card">
-          <h3>Features</h3>
-          <p>See what this template can do — responsive, dark mode, and more.</p>
-          <ul class="lyrics-list" style="display:none;">
-            <li><a href="#" class="lyric-link" data-lyric="አንታይ እሞ ክብል የ ">Lyric 1</a></li>
-            <li><a href="#እንታይ" class="lyric-link" data-lyric="ዘልኣለም">Lyric 2</a></li>
-            <li><a href="#እንታይ ኣሎ" class="lyric-link" data-lyric="Lyric 3 for Pricing">Lyric 3</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 4 for Pricing">Lyric 4</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 5 for Pricing">Lyric 5</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 6 for Pricing">Lyric 6</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 7 for Pricing">Lyric 7</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 8 for Pricing">Lyric 8</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 9 for Pricing">Lyric 9</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 10 for Pricing">Lyric 10</a></li>
-          </ul>
-        </div>
+    <!-- Search Bar -->
+    <div style="margin:20px 0; text-align:center;">
+      <input type="text" id="lyricSearch" placeholder="Search lyrics or cards..." style="padding:8px 12px; width:250px; border-radius:8px; border:1px solid #ccc; font-size:14px;">
+    </div>
 
-        <div class="choice-card">
-          <h3>Pricing</h3>
-          <p>Check out the available plans and options for your needs.</p>
-          <ul class="lyrics-list" style="display:none;">
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 1 for Pricing">Lyric 1</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 2 for Pricing">Lyric 2</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 3 for Pricing">Lyric 3</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 4 for Pricing">Lyric 4</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 5 for Pricing">Lyric 5</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 6 for Pricing">Lyric 6</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 7 for Pricing">Lyric 7</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 8 for Pricing">Lyric 8</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 9 for Pricing">Lyric 9</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 10 for Pricing">Lyric 10</a></li>
-          </ul>
-        </div>
-
-        <div class="choice-card">
-          <h3>Contact</h3>
-          <p>Get in touch with us for more information or support.</p>
-          <ul class="lyrics-list" style="display:none;">
-            <li><a href="#" class="lyric-link" data-lyric="አሞ አንታይ ኣሎ">Lyric 1</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 2 for Pricing">Lyric 2</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 3 for Pricing">Lyric 3</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 4 for Pricing">Lyric 4</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 5 for Pricing">Lyric 5</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 6 for Pricing">Lyric 6</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 7 for Pricing">Lyric 7</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 8 for Pricing">Lyric 8</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 9 for Pricing">Lyric 9</a></li>
-            <li><a href="#" class="lyric-link" data-lyric="Lyric 10 for Pricing">Lyric 10</a></li>
-          </ul>
-        </div>
+    <div class="home-choices">
+      <div class="choices-grid" id="Personal">
+        <div class="choice-card"><h3>Ane</h3></div>
+        <div class="choice-card"><h3>Nsu</h3></div>
+        <div class="choice-card"><h3>Nsa</h3></div>
       </div>
-
-      <div id="lyricDisplay" class="card" style="margin-top:20px;display:none;"></div>
-    </section>
-    
-    <div class="footer">@ Nzemr</div>
+    </div>
   </main>
 
-  <main class="main" id="content" role="main">
-    <section id="እንታይ ኣሎ" class="home-choices">
-      <h2 class="section-title">Welcome</h2>
-      <p class="muted">​
 
-             ኣብዚ ዘብጽሕካኒ ንስኻ ኢኻ አብዚ
-          ኣብዚ ዝበጻሕኩ በኣኻ’ዩ አብዚ
-          ነየናይ ጀሚረ ነየናይ ክገድፎ 
-          ዝገበረካለይ ብዙሕ’ዩ ጸብጺበ ኣይቆጽሮን
-          ምስጋናይ ዘሎኒ ነዓኻ ስለቲ ሰናይ’ካ
+  <main class="main">
+    <h2 class="section-title">Lyrics Library</h2>
 
-1. ኣበይ ምሃለኹ ተዘይትሓስበኒ
-   ካብ ጎደፍ አልዒልካ
-   ዙፋን ክብሪ ተዘይተውርሰኒ
-   ብሂግካኒ ኢኻ እሞ ኣናጊፍካኒ 
-   ንቁም ነገር ኮይነ ሰብ ጌርካኒ
+    <!-- Search Bar -->
+    <div style="margin:20px 0; text-align:center;">
+      <input type="text" id="lyricSearch" placeholder="Search lyrics or cards..." style="padding:8px 12px; width:250px; border-radius:8px; border:1px solid #ccc; font-size:14px;">
+    </div>
 
-            2. ኦሮማይ ዝተባህሎ ሓወልቲ ዝተዘርኦ
-                 ክንደይ ዘይተሓልፈ በረኽቲ ስምጭሮ
-                 ኣብ ዝባንካ ጼርካ ሓንጊርካ አስጊርካያ
-                 ምህላውካ ምስኣ ነብሰይ ምስክር‘ያ
+    <div class="home-choices">
+      <div class="choices-grid" id="Group">
+        <div class="choice-card"><h3>GAne</h3></div>
+        <div class="choice-card"><h3>GNsu</h3></div>
+        <div class="choice-card"><h3>GNsa</h3></div>
+      </div>
+    </div>
+  </main>
 
-3. ኣለኹ አይጠፋእኩን ዋጋ’ዩ ተኸፊሉኒ
-   ሒዙ ኣየስጠመንን እቲ ረግረግ ሰልሚ
-   ሞተይ እንተ ኣውረየ ትምኒትዩ ጸላእየይ
-   ኣነ አለኹ’የ ካብ ዘይጠፍእ ዘርኢ’የ:</p>
+  <footer class="footer">© 2025 CleanSite. All rights reserved.</footer>
 
-      <main class="main" id="content" role="main">
-    <section id="እንታይ" class="home-choices">
-      <h2 class="section-title">Entay alo nblo</h2>
-      <p class="muted">​
-
-             ኣብዚ ዘብጽሕካኒ ንስኻ ኢኻ አብዚ
-          ኣብዚ ዝበጻሕኩ በኣኻ’ዩ አብዚ
-          ነየናይ ጀሚረ ነየናይ ክገድፎ 
-          ዝገበረካለይ ብዙሕ’ዩ ጸብጺበ ኣይቆጽሮን
-          ምስጋናይ ዘሎኒ ነዓኻ ስለቲ ሰናይ’ካ
-
-1. ኣበይ ምሃለኹ ተዘይትሓስበኒ
-   ካብ ጎደፍ አልዒልካ
-   ዙፋን ክብሪ ተዘይተውርሰኒ
-   ብሂግካኒ ኢኻ እሞ ኣናጊፍካኒ 
-   ንቁም ነገር ኮይነ ሰብ ጌርካኒ
-
-            2. ኦሮማይ ዝተባህሎ ሓወልቲ ዝተዘርኦ
-                 ክንደይ ዘይተሓልፈ በረኽቲ ስምጭሮ
-                 ኣብ ዝባንካ ጼርካ ሓንጊርካ አስጊርካያ
-                 ምህላውካ ምስኣ ነብሰይ ምስክር‘ያ
-
-3. ኣለኹ አይጠፋእኩን ዋጋ’ዩ ተኸፊሉኒ
-   ሒዙ ኣየስጠመንን እቲ ረግረግ ሰልሚ
-   ሞተይ እንተ ኣውረየ ትምኒትዩ ጸላእየይ
-   ኣነ አለኹ’የ ካብ ዘይጠፍእ ዘርኢ’የ:</p>
   <script>
-    (function(){
-      // Theme toggle
+    // Sidebar toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('siteSidebar');
+    hamburgerBtn.addEventListener('click',()=>{
+      hamburgerBtn.classList.toggle('active');
+      sidebar.classList.toggle('open');
+    });
+
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click',()=>{
       const body = document.body;
-      const toggle = document.getElementById('themeToggle');
-      const userPref = localStorage.getItem('site-theme');
-
-      function applyTheme(theme){
-        body.setAttribute('data-theme', theme);
-        toggle.setAttribute('aria-pressed', theme === 'dark');
+      if(body.getAttribute('data-theme')==='light'){
+        body.setAttribute('data-theme','dark');
+        themeBtn.textContent='☀️';
+      }else{
+        body.setAttribute('data-theme','light');
+        themeBtn.textContent='🌙';
       }
+    });
 
-      if(userPref){
-        applyTheme(userPref);
-      } else {
-        const preferDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(preferDark ? 'dark' : 'light');
-      }
+    // Clock
+    function updateClock(){
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      document.getElementById('date').textContent = now.toLocaleDateString([], {day:'2-digit',month:'short',year:'numeric'});
+    }
+    setInterval(updateClock,1000);
+    updateClock();
 
-      toggle.addEventListener('click', () => {
-        const current = body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-        const next = current === 'dark' ? 'light' : 'dark';
-        applyTheme(next);
-        localStorage.setItem('site-theme', next);
+    // --- Lyrics library ---
+    const lyricsLibrary = {
+      lyric1: "አንታይ እሞ ክብል የ",
+      lyric2: "ዘልኣለም",
+      lyric3: "Lyric 3 for Pricing",
+      lyric4: "Lyric 4 for Pricing",
+      lyric5: "Lyric 5 for Pricing",
+      lyric6: "Lyric 6 for Pricing",
+      lyric7: "Lyric 7 for Contact",
+      lyric8: "Lyric 8 for Contact",
+      lyric9: "Lyric 9 for Contact",
+      lyric10: "Lyric 10 for Contact"
+    };
+
+    const cardLyrics = {
+      features: ["lyric1","lyric2","lyric3","lyric4"],
+      pricing: ["lyric3","lyric4","lyric5","lyric6"],
+      contact: ["lyric1","lyric7","lyric8","lyric9","lyric10"]
+    };
+
+    const cardsGrid = document.getElementById('choicesGrid');
+
+    // Create lyrics lists inside cards
+    document.querySelectorAll('.choice-card').forEach(card=>{
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const list = document.createElement('ul');
+      list.className = 'lyrics-list';
+      list.style.display='none';
+      const ids = cardLyrics[title] || [];
+      ids.forEach(id=>{
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href='#';
+        a.textContent = lyricsLibrary[id];
+        a.className='lyric-link';
+        li.appendChild(a);
+        list.appendChild(li);
       });
+      card.appendChild(list);
 
-      // Sidebar toggle
-      const hamburger = document.getElementById('hamburgerBtn');
-      const sidebar = document.getElementById('siteSidebar');
-      hamburger.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-        hamburger.classList.toggle('active');
-        const expanded = hamburger.classList.contains('active');
-        sidebar.setAttribute('aria-hidden', !expanded);
-        hamburger.setAttribute('aria-expanded', expanded);
+      card.addEventListener('click', ()=>{
+        list.style.display = list.style.display === 'block' ? 'none' : 'block';
       });
+    });
 
-      document.addEventListener('click', (e) => {
-        if(!sidebar.classList.contains('open')) return;
-        const inside = sidebar.contains(e.target) || hamburger.contains(e.target);
-        if(!inside && window.innerWidth < 900){
-          sidebar.classList.remove('open');
-          hamburger.classList.remove('active');
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape' && sidebar.classList.contains('open')){
-          sidebar.classList.remove('open');
-          hamburger.classList.remove('active');
-        }
-      });
-
-      // Clock & date
-      const clockEl = document.getElementById('clock');
-      const dateEl = document.getElementById('dateText');
-      function pad(n){ return n<10 ? '0'+n : n; }
-      function updateDateTime(){
-        const now = new Date();
-        clockEl.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-        dateEl.textContent = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      }
-      updateDateTime();
-      setInterval(updateDateTime, 1000);
-
-      // Sidebar nav smooth scroll
-      document.querySelectorAll('.menu a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e=>{
-          e.preventDefault();
-          const target = document.getElementById(a.getAttribute('href').slice(1));
-          if(target){
-            target.scrollIntoView({behavior:'smooth', block:'start'});
-          }
-          if(window.innerWidth<900){ sidebar.classList.remove('open'); hamburger.classList.remove('active'); }
-        });
-      });
-
-      // Expand/collapse cards
+    // Live search filter for cards and lyrics
+    const searchInput = document.getElementById('lyricSearch');
+    searchInput.addEventListener('input', function(){
+      const term = this.value.toLowerCase();
       document.querySelectorAll('.choice-card').forEach(card=>{
-        card.addEventListener('click', (e)=>{
-          if(e.target.tagName!=='A'){
-            const list = card.querySelector('.lyrics-list');
-            if(list) list.style.display = list.style.display==='none'?'block':'none';
+        const lyrics = Array.from(card.querySelectorAll('.lyrics-list li')).map(li=>li.textContent.toLowerCase());
+        const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+        // Filter lyrics inside card
+        let hasMatch = false;
+        card.querySelectorAll('.lyrics-list li').forEach(li=>{
+          if(li.textContent.toLowerCase().includes(term)){
+            li.style.display='list-item';
+            hasMatch=true;
+          }else{
+            li.style.display='none';
           }
         });
+        // Show card if title or any lyric matches
+        if(cardTitle.includes(term) || hasMatch){
+          card.style.display='block';
+        }else{
+          card.style.display='none';
+        }
       });
-
-      // Show lyric content
-      document.querySelectorAll('.lyric-link').forEach(link=>{
-        link.addEventListener('click', e=>{
-          e.preventDefault();
-          const display = document.getElementById('lyricDisplay');
-          display.style.display='block';
-          display.textContent = link.getAttribute('data-lyric');
-          display.scrollIntoView({behavior:'smooth', block:'start'});
-        });
-      });
-
-    })();
+    });
   </script>
 </body>
 </html>
