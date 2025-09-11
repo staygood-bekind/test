@@ -1,58 +1,24 @@
-// lyrics.js
 const lyricsData = {
-  // Author:
-  // Album:
-  // Genre:
-  // Year:
-  song1: `​ኣብዚ ዘብጽሕካኒ ንስኻ ኢኻ አብዚ
-          ኣብዚ ዝበጻሕኩ በኣኻ’ዩ አብዚ
-          ነየናይ ጀሚረ ነየናይ ክገድፎ 
-          ዝገበረካለይ ብዙሕ’ዩ ጸብጺበ ኣይቆጽሮን
-          ምስጋናይ ዘሎኒ ነዓኻ ስለቲ ሰናይ’ካ
+  song1: {
+    title: { tig: "ኣብዚ ዘብጽሕካኒ", eng: "Abzi Zebxahkani" },
+    tig: `1ኣብዚ ዘብጽሕካኒ ንስኻ ኢኻ አብዚ ...`,
+    eng: `abzi zebxaHkani nsKa iKa ...`
+  },
+  song2: {
+    title: { tig: "ብግብርኻ ተደኒቀ", eng: "By Your Work You Were Saved" },
+    tig: `2ብግብርኻ ተደኒቀ ...`,
+    eng: `By your work you were saved ...`
+  },
+  song3: {
+    title: { tig: "ብግብርኻ ተደኒቀ", eng: "By Your Work You Were Saved" },
+    tig: `3ብግብርኻ ተደኒቀ ...`,
+    eng: `By your work you were saved ...`
+  },
 
-1. ኣበይ ምሃለኹ ተዘይትሓስበኒ
-   ካብ ጎደፍ አልዒልካ
-   ዙፋን ክብሪ ተዘይተውርሰኒ
-   ብሂግካኒ ኢኻ እሞ ኣናጊፍካኒ 
-   ንቁም ነገር ኮይነ ሰብ ጌርካኒ
-
-            2. ኦሮማይ ዝተባህሎ ሓወልቲ ዝተዘርኦ
-                 ክንደይ ዘይተሓልፈ በረኽቲ ስምጭሮ
-                 ኣብ ዝባንካ ጼርካ ሓንጊርካ አስጊርካያ
-                 ምህላውካ ምስኣ ነብሰይ ምስክር‘ያ
-
-3. ኣለኹ አይጠፋእኩን ዋጋ’ዩ ተኸፊሉኒ
-   ሒዙ ኣየስጠመንን እቲ ረግረግ ሰልሚ
-   ሞተይ እንተ ኣውረየ ትምኒትዩ ጸላእየይ
-   ኣነ አለኹ’የ ካብ ዘይጠፍእ ዘርኢ’የ`,
-
-  "song1.1": `​abzi zebxaHkani nsKa iKa
-          ኣብዚ ዝበጻሕኩ በኣኻ’ዩ አብዚ
-          ነየናይ ጀሚረ ነየናይ ክገድፎ 
-          ዝገበረካለይ ብዙሕ’ዩ ጸብጺበ ኣይቆጽሮን
-          ምስጋናይ ዘሎኒ ነዓኻ ስለቲ ሰናይ’ካ
-
-1. ኣበይ ምሃለኹ ተዘይትሓስበኒ
-   ካብ ጎደፍ አልዒልካ
-   ዙፋን ክብሪ ተዘይተውርሰኒ
-   ብሂግካኒ ኢኻ እሞ ኣናጊፍካኒ 
-   ንቁም ነገር ኮይነ ሰብ ጌርካኒ
-
-            2. ኦሮማይ ዝተባህሎ ሓወልቲ ዝተዘርኦ
-                 ክንደይ ዘይተሓልፈ በረኽቲ ስምጭሮ
-                 ኣብ ዝባንካ ጼርካ ሓንጊርካ አስጊርካያ
-                 ምህላውካ ምስኣ ነብሰይ ምስክር‘ያ
-
-3. ኣለኹ አይጠፋእኩን ዋጋ’ዩ ተኸፊሉኒ
-   ሒዙ ኣየስጠመንን እቲ ረግረግ ሰልሚ
-   ሞተይ እንተ ኣውረየ ትምኒትዩ ጸላእየይ
-   ኣነ አለኹ’የ ካብ ዘይጠፍእ ዘርኢ’የ`,
-  //-------------------------------------------------------------
-    // Author:
-  // Album:
-  // Genre:
-  // Year:
-  song4: `​1) ኣየሕፍረንን ትህላውነትካ 
+  
+  song4: {
+    title: { tig: "ብግብርኻ ተደኒቀ", eng: "bgbrka tedeniqe" },
+    tig: `1) ኣየሕፍረንን ትህላውነትካ 
      እኳ ደኣ ይብለኒ ተንስእ ካብ ምውዳቅካ
      ሰላመይ ይሰፍን ምሳኻ ክከውን
      እቲ ባዶ ልበይ ብርሃንካ ይውንን
@@ -84,45 +50,53 @@ const lyricsData = {
 ዕቤትካ ሪኤ የሱሰይ እሽብሽበልካ
 ገለ ተገለጽኩ ካብ ውዕለትካ እቃንየልካ
 ብተኣምራትካ ተደኒቀ አመስግነካ
-               ብግርኻ......,
+               ብግርኻ......
+`,
+    eng: `1)
+Ayyeḥfrenn tihlawnetekha
+ʼKwa de’a yibleñi tens’e’ kab m’wedakha
+Selamey yisefen misaḫa k’ekewen
+ʼEti bādo libey birḥanka yiwnen
 
-  "song4.1": 1) ayeḥfärenen tiḥlawnetika
-ekwa de’a yibläni tenesi’ kab miwuda’ika
-selamey yisefen misaka kikewn
-eti bado libey birhanka yiwunən
-2) neti qenu’ awet kemtiḥbo
-Yesusey nints’uḥ kab kefu’ tiḥlowo
-ane gna welḥanti zeybley
-kulu rəḥibeyo bifqerka goytay
-3) baḥri meqelu ḥzbuqua zeḥläfe
-natey qelayat entay keygebero’lä
-mis lemenkewo ab af beytka koyne
-zire’aḥwo gəbri miglats’u si’ine (2)
+2)
+Neti q’nu’ ʼawet kem t’ḥbo
+Yesusey nnṣuh kab kifu’ t’ḥilwo
+Ane g’na welḥanti zeybiley
+Kulu reḫibeyo b’fiqerka goytay
 
-kab libey misgana nabaḥa yidriguho
-neti zire’əkwo (nezi zelekwo) gele entegela’tso
+3)
+Baḥri meqelu ḥezbuka zeḥlefe
+Natēy qelāyat entay keygebrōle
+Mis lemenk’wo ab af betka koyne
+Zre’akwo gibri m’glatsu s’ine
 
-entay alo emo ane zeḥbeka
-bizäyka mimsgan miglas wu’letka
-entay alo emo ane zeḥbeka
-Yesusey mimsgan’yu miglas wu’letka
+(Chorus/Bridge)
+Kab libey misgana nabakha yidrguhō
+Neti zre’kwo (nezi zelekwo) gele entegeleṣo
 
-bigərka (bita’emratika) tedeniqe amesgineka fətine
-abey amo ay akhelon eti qalat niwu’letka (nigbrika) (2)
-megəlätsi ḥagosay gna kiber niges’eye zibleka
+Entay alo emo ane zḥbeka
+Bzeyka mimsgan m’glas w’iletka
+Entay alo emo ane zḥbeka
+Yesusey mimsgan’yu m’glas w’iletka
 
-li’ul Amlak fgm ile esegidelka
-biḥagos desta temelia yi’əllelka
-’beytka ri’e Yesusey eshibshebelka
-gele tegeläts’ku kab wu’letka eqanyelka
-bita’emratika tedeniqe amesgineka
-bigərka……,
-  //-------------------------------------------------------------
-  song2: Is this the real life? Is this just fantasy?
-Caught in a landslide, no escape from reality
-Open your eyes, look up to the skies and see...
+Meza:
+B’g’rka (b’te’amratka) tedniqe kemesgeneka fetine
+Abey amo ay akhelon ’eti q’lat n’wu’letka (n’gibrka)
+Megleṣi ḥagosey g’na k’ber n’ges’ye z’bleka
 
+L’ul Amlak f’g’m ile esegdelka
+B’ḥagos desta temeli’a yi’llellelka
+ʼIbetka rī’e yesusey eshbeshbelka
+Gele tegelesk’u kab wu’letka ’eqanyelka
+B’te’amratka tedniqe amesgeneka
+B’g’rka...`
+  },
 
-`
-  // Add more songs as needed
+  
+  song5: {
+    title: { tig: "ብግብርኻ ተደኒቀ", eng: "By Your Work You Were Saved" },
+    tig: `6ብግብርኻ ተደኒቀ ...`,
+    eng: `By your work you were saved ...`
+  }
+  // add more songs here
 };
