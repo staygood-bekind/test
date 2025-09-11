@@ -238,19 +238,19 @@ tagBtn.addEventListener('click', ()=>{
 });
 
   // Language toggle button
-// Language toggle button
 const langBtn = document.getElementById('langBtn');
 let currentLang = 'tig'; // default language
 
 langBtn.addEventListener('click', () => {
   if(!currentCard) return;
 
-  // Toggle between tig and eng
+  // Toggle language
   currentLang = currentLang === 'tig' ? 'eng' : 'tig';
   langBtn.textContent = currentLang.toUpperCase();
 
-  const baseId = currentCard.dataset.id; // e.g., "song1"
+  const baseId = currentCard.dataset.id; 
   modalContent.textContent = lyricsData[baseId][currentLang] || '';
+  modalTitle.textContent = lyricsData[baseId].title[currentLang] || '';
 });
 
 // When opening modal (default Tig)
@@ -258,10 +258,11 @@ cards.forEach(card => {
   card.addEventListener('click', () => {
     currentCard = card;
     const id = card.dataset.id; 
-    modalTitle.textContent = card.querySelector('h3').textContent;
 
-    currentLang = 'tig'; // reset to tig when opening
+    currentLang = 'tig'; // reset to tig
     langBtn.textContent = 'TIG';
+    
+    modalTitle.textContent = lyricsData[id].title[currentLang] || card.querySelector('h3').textContent;
     modalContent.textContent = lyricsData[id][currentLang] || '';
 
     lyricModal.style.display = 'flex';
