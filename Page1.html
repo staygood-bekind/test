@@ -149,6 +149,7 @@ box-shadow:0 6px 18px rgba(59,130,246,0.12);}
     <h3 id="modalTitle"></h3>
     <p id="modalContent"></p>
     <button id="tagBtn" class="btn">Tag/Untag</button>
+    <button id="langBtn" class="btn">Tig</button>
   </div>
 </div>
 
@@ -205,6 +206,22 @@ tagBtn.addEventListener('click', ()=>{
   updateSongCount();
 });
 
+  // Language toggle button
+const langBtn = document.getElementById('langBtn');
+let currentLang = 'Tig'; // default
+
+langBtn.addEventListener('click', () => {
+  if(!currentCard) return;
+
+  currentLang = currentLang === 'Tig' ? 'Eng' : 'Tig';
+  langBtn.textContent = currentLang;
+
+  // Determine which lyric to show based on language
+  const baseId = currentCard.dataset.id; // e.g., "song1"
+  const langId = currentLang === 'Tig' ? baseId : baseId + '.1'; // "song1.1" for Eng
+
+  modalContent.textContent = lyricsData[langId] || ''; 
+});
 const searchInput = document.getElementById('searchInput');
 const songCount = document.getElementById('songCount');
 
