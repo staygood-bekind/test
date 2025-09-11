@@ -26,11 +26,7 @@ const lyricsData = {
    ሞተይ እንተ ኣውረየ ትምኒትዩ ጸላእየይ
    ኣነ አለኹ’የ ካብ ዘይጠፍእ ዘርኢ’የ`,
 
-  // Author:
-  // Album:
-  // Genre:
-  // Year:
-  song1.1: `​abzi zebxaHkani nsKa iKa
+  "song1.1": `​abzi zebxaHkani nsKa iKa
           ኣብዚ ዝበጻሕኩ በኣኻ’ዩ አብዚ
           ነየናይ ጀሚረ ነየናይ ክገድፎ 
           ዝገበረካለይ ብዙሕ’ዩ ጸብጺበ ኣይቆጽሮን
@@ -51,7 +47,7 @@ const lyricsData = {
    ሒዙ ኣየስጠመንን እቲ ረግረግ ሰልሚ
    ሞተይ እንተ ኣውረየ ትምኒትዩ ጸላእየይ
    ኣነ አለኹ’የ ካብ ዘይጠፍእ ዘርኢ’የ`,
-  
+  //-------------------------------------------------------------
   song2: `Is this the real life? Is this just fantasy?
 Caught in a landslide, no escape from reality
 Open your eyes, look up to the skies and see...`
