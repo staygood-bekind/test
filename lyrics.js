@@ -1,5 +1,9 @@
 // lyrics.js
 const lyricsData = {
+  // Author:
+  // Album:
+  // Genre:
+  // Year:
   song1: `​ኣብዚ ዘብጽሕካኒ ንስኻ ኢኻ አብዚ
           ኣብዚ ዝበጻሕኩ በኣኻ’ዩ አብዚ
           ነየናይ ጀሚረ ነየናይ ክገድፎ 
@@ -22,6 +26,32 @@ const lyricsData = {
    ሞተይ እንተ ኣውረየ ትምኒትዩ ጸላእየይ
    ኣነ አለኹ’የ ካብ ዘይጠፍእ ዘርኢ’የ`,
 
+  // Author:
+  // Album:
+  // Genre:
+  // Year:
+  song1.1: `​abzi zebxaHkani nsKa iKa
+          ኣብዚ ዝበጻሕኩ በኣኻ’ዩ አብዚ
+          ነየናይ ጀሚረ ነየናይ ክገድፎ 
+          ዝገበረካለይ ብዙሕ’ዩ ጸብጺበ ኣይቆጽሮን
+          ምስጋናይ ዘሎኒ ነዓኻ ስለቲ ሰናይ’ካ
+
+1. ኣበይ ምሃለኹ ተዘይትሓስበኒ
+   ካብ ጎደፍ አልዒልካ
+   ዙፋን ክብሪ ተዘይተውርሰኒ
+   ብሂግካኒ ኢኻ እሞ ኣናጊፍካኒ 
+   ንቁም ነገር ኮይነ ሰብ ጌርካኒ
+
+            2. ኦሮማይ ዝተባህሎ ሓወልቲ ዝተዘርኦ
+                 ክንደይ ዘይተሓልፈ በረኽቲ ስምጭሮ
+                 ኣብ ዝባንካ ጼርካ ሓንጊርካ አስጊርካያ
+                 ምህላውካ ምስኣ ነብሰይ ምስክር‘ያ
+
+3. ኣለኹ አይጠፋእኩን ዋጋ’ዩ ተኸፊሉኒ
+   ሒዙ ኣየስጠመንን እቲ ረግረግ ሰልሚ
+   ሞተይ እንተ ኣውረየ ትምኒትዩ ጸላእየይ
+   ኣነ አለኹ’የ ካብ ዘይጠፍእ ዘርኢ’የ`,
+  
   song2: `Is this the real life? Is this just fantasy?
 Caught in a landslide, no escape from reality
 Open your eyes, look up to the skies and see...`
