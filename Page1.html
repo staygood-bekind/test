@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -53,6 +53,8 @@ box-shadow:0 6px 18px rgba(59,130,246,0.12);}
 .section-title{text-align:center;margin:0;}
 #songCount{margin:8px 0;font-weight:600;text-align:center;}
 #searchInput{display:block;margin:8px auto 12px;padding:10px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);width:80%;max-width:400px;font-size:14px;}
+.group-buttons{text-align:center;margin:12px 0;}
+.group-buttons .btn{margin:4px;}
 
 /* Scrollable cards */
 .choices-grid{flex:1;overflow:auto;display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(35%,1fr));padding-top:10px;}
@@ -65,14 +67,9 @@ box-shadow:0 6px 18px rgba(59,130,246,0.12);}
 #lyricModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:50;}
 #lyricModalContent{background:var(--card);color:var(--text);padding:24px;border-radius:12px;max-width:600px;width:90%;max-height:80%;overflow:auto;position:relative;}
 #closeModal{position:absolute;top:12px;right:12px;border:none;background:transparent;font-size:24px;cursor:pointer;}
-
-/* Fix: don't hide .btn on phones anymore */
 @media (max-width:880px){.sidebar { width:260px; }.main { padding-left:18px; padding-right:18px; }.brand .title { display:none; }}
 @media (max-width:560px){.topbar{padding:0 12px;}}
-  #modalContent {
-  white-space: pre-wrap;   /* preserves line breaks */
-  line-height: 1.6;        /* optional, nicer spacing */
-}
+#modalContent { white-space: pre-wrap; line-height:1.6; }
 </style>
 </head>
 
@@ -114,6 +111,14 @@ box-shadow:0 6px 18px rgba(59,130,246,0.12);}
       <h2 class="section-title">Welcome to Lyric Site</h2>
       <div id="songCount">Songs: 0</div>
       <input type="text" id="searchInput" placeholder="Search lyrics, songs or tags..." />
+      <!-- Group buttons -->
+      <div class="group-buttons">
+        <button class="btn" data-group="album">Group by Album</button>
+        <button class="btn" data-group="author">Group by By</button>
+        <button class="btn" data-group="genre">Group by Genre</button>
+        <button class="btn" data-group="year">Group by Year</button>
+        <button class="btn" data-group="all">Show All</button>
+      </div>
     </div>
 
     <div class="choices-grid" id="lyricsGrid">
@@ -171,7 +176,7 @@ function pad(n){return n<10?'0'+n:n;}
 function updateDateTime(){const now=new Date();clockEl.textContent=`${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`; const opts={weekday:'long',year:'numeric',month:'long',day:'numeric'};dateEl.textContent=now.toLocaleDateString(undefined,opts);}
 updateDateTime(); setInterval(updateDateTime,1000);
 
-const cards = document.querySelectorAll('.choice-card');
+const cards = Array.from(document.querySelectorAll('.choice-card'));
 const lyricModal = document.getElementById('lyricModal');
 const modalTitle = document.getElementById('modalTitle');
 const modalContent = document.getElementById('modalContent');
@@ -184,7 +189,7 @@ cards.forEach(card => {
     currentCard = card;
     const id = card.dataset.id; 
     modalTitle.textContent = card.querySelector('h3').textContent;
-    modalContent.textContent = lyricsData[id]; 
+    modalContent.textContent = lyricsData ? lyricsData[id] : ''; 
     lyricModal.style.display = 'flex';
     tagBtn.textContent = card.classList.contains('taged') ? 'Untag' : 'Tag';
   });
@@ -204,15 +209,16 @@ const searchInput = document.getElementById('searchInput');
 const songCount = document.getElementById('songCount');
 
 function updateSongCount(){
-  const visible = Array.from(cards).filter(c=>c.style.display!=='none');
+  const visible = cards.filter(c=>c.style.display!=='none');
   songCount.textContent = 'Songs: '+visible.length;
 }
 
+// Search
 searchInput.addEventListener('input', () => {
   const term = searchInput.value.toLowerCase();
   cards.forEach(card => {
     const id = card.dataset.id;
-    const lyricText = lyricsData[id] ? lyricsData[id].toLowerCase() : '';
+    const lyricText = lyricsData && lyricsData[id] ? lyricsData[id].toLowerCase() : '';
     const cardText = card.textContent.toLowerCase();
     if (term.startsWith('#')) {
       const tagTerm = term.slice(1);
@@ -223,6 +229,38 @@ searchInput.addEventListener('input', () => {
   });
   updateSongCount();
 });
+
+// Grouping
+document.querySelectorAll('.group-buttons .btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const group = btn.dataset.group;
+    const grid = document.getElementById('lyricsGrid');
+    grid.innerHTML = '';
+    if(group==='all'){
+      cards.forEach(card => grid.appendChild(card));
+      updateSongCount();
+      return;
+    }
+    const groups = {};
+    cards.forEach(card=>{
+      let key;
+      if(group==='year') key = card.dataset.date.split('-')[0]; 
+      else key = card.dataset[group];
+      if(!groups[key]) groups[key] = [];
+      groups[key].push(card);
+    });
+    Object.keys(groups).sort().forEach(key=>{
+      const heading = document.createElement('h3');
+      heading.textContent = key;
+      heading.style.gridColumn = '1 / -1';
+      heading.style.marginTop = '24px';
+      grid.appendChild(heading);
+      groups[key].forEach(card=>grid.appendChild(card));
+    });
+    updateSongCount();
+  });
+});
+
 updateSongCount();
 })();
 </script>
