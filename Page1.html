@@ -160,7 +160,7 @@ box-shadow:0 6px 18px rgba(59,130,246,0.12);}
         <p>Genre: Rock</p>
         <p>Date: 1975-10-31</p>
       </div>
-      <div class="choice-card taged" data-id="song4" data-genre="Rock" data-date="1975-10-31" data-author="Queen" data-album="A Night at the Opera">
+      <div class="choice-card taged" data-id="song2" data-genre="Rock" data-date="1975-10-31" data-author="Queen" data-album="A Night at the Opera">
         <h3>ብግብርኻ ተደኒቀ</h3>
         <p>By: ሴም ፡ ኣድያም</p>
         <p>Album: ንስል</p>
@@ -238,21 +238,37 @@ tagBtn.addEventListener('click', ()=>{
 });
 
   // Language toggle button
+// Language toggle button
 const langBtn = document.getElementById('langBtn');
-let currentLang = 'Tig'; // default
+let currentLang = 'tig'; // default language
 
 langBtn.addEventListener('click', () => {
   if(!currentCard) return;
 
-  currentLang = currentLang === 'Tig' ? 'Eng' : 'Tig';
-  langBtn.textContent = currentLang;
+  // Toggle between tig and eng
+  currentLang = currentLang === 'tig' ? 'eng' : 'tig';
+  langBtn.textContent = currentLang.toUpperCase();
 
-  // Determine which lyric to show based on language
   const baseId = currentCard.dataset.id; // e.g., "song1"
-  const langId = currentLang === 'Tig' ? baseId : baseId + '.1'; // "song1.1" for Eng
-
-  modalContent.textContent = lyricsData[langId] || ''; 
+  modalContent.textContent = lyricsData[baseId][currentLang] || '';
 });
+
+// When opening modal (default Tig)
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    currentCard = card;
+    const id = card.dataset.id; 
+    modalTitle.textContent = card.querySelector('h3').textContent;
+
+    currentLang = 'tig'; // reset to tig when opening
+    langBtn.textContent = 'TIG';
+    modalContent.textContent = lyricsData[id][currentLang] || '';
+
+    lyricModal.style.display = 'flex';
+    tagBtn.textContent = card.classList.contains('taged') ? 'Untag' : 'Tag';
+  });
+});
+
 const searchInput = document.getElementById('searchInput');
 const songCount = document.getElementById('songCount');
 
