@@ -35,7 +35,24 @@ box-shadow:0 6px 18px rgba(59,130,246,0.12);}
 .top-controls{display:flex;align-items:center;gap:12px;}
 .btn{border:1px solid rgba(0,0,0,0.06);background:var(--card);color:var(--text);padding:8px 12px;border-radius:8px;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--shadow);}
 [data-theme="dark"] .btn{border:1px solid rgba(255,255,255,0.04);}
-.theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:8px;background:transparent;border:none;cursor:pointer;}
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--accent);      /* makes button colored */
+  color: white;                    /* ensures icon/text is visible */
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* subtle shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
 .sidebar{position: fixed;top: 64px;left: 0;bottom: 0;width: 280px;transform: translateX(-320px);transition: transform .32s cubic-bezier(.2,.9,.2,1);background: var(--sidebar);padding:20px;box-shadow: 2px 0 18px rgba(2,6,23,0.06);z-index:35;overflow:auto;}
 .sidebar.open{transform: translateX(0);}
 .sidebar .side-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
