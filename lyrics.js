@@ -1,102 +1,93 @@
 const lyricsData = {
-  song1: {
-    title: { tig: "ኣብዚ ዘብጽሕካኒ", eng: "Abzi Zebxahkani" },
-    tig: `1ኣብዚ ዘብጽሕካኒ ንስኻ ኢኻ አብዚ ...`,
-    eng: `abzi zebxaHkani nsKa iKa ...`
-  },
-  song2: {
-    title: { tig: "ብግብርኻ ተደኒቀ", eng: "By Your Work You Were Saved" },
-    tig: `2ብግብርኻ ተደኒቀ ...`,
-    eng: `By your work you were saved ...`
-  },
-  song3: {
-    title: { tig: "ብግብርኻ ተደኒቀ", eng: "By Your Work You Were Saved" },
-    tig: `3ብግብርኻ ተደኒቀ ...`,
-    eng: `By your work you were saved ...`
-  },
-
-  
-  song4: {
-    title: { tig: "ብግብርኻ ተደኒቀ", eng: "bgbrka tedeniqe" },
-    tig: `1) ኣየሕፍረንን ትህላውነትካ 
-     እኳ ደኣ ይብለኒ ተንስእ ካብ ምውዳቅካ
-     ሰላመይ ይሰፍን ምሳኻ ክከውን
-     እቲ ባዶ ልበይ ብርሃንካ ይውንን
-
-2) ነቲ ቅኑዕ ዓወት ከምትህቦ
-     የሱሰይ ንንጹህ ካብ ክፉእ ትሕልዎ
-     ኣነ ግና ወልሓንቲ  ዘይብለይ 
-     ኩሉ ረኺበዮ ብፍቅርኻ ጎይታይ
-
-3) ባሕሪ መቀሉ ህዝቡኳ ዘሕለፈ 
-      ናተይ ቀላያት እንታይ ከይገብሮ'ለ
-      ምስ ለመንክዎ ኣብ ኣፍ ቤትካ ኮይነ 
-      ዝረኣኽዎ ግብሪ ምግላጹ ስኢነ        (2)
-
-ካብ ልበይ ምስጋና ናባኻ ይድርጉሖ 
-ነቲ ዝረእኽዎ (ነዚ ዘለኽዎ) ገለ እንተገለጾ 
-
- እንታይ ኣሎ እሞ ኣነ ዝህበካ
-ብዘይካ ምምስጋን ምግላስ ውዕለትካ
-እንታይ ኣሎ እሞ ኣነ ዝህበካ
-የሱሰይ ምምስጋን'ዩ ምግላስ ውዕለትካ
-
-መዛ፦ ብግርኻ (ብተኣምራትካ) ተደኒቀ ከመስግነካ ፈቲነ
-    ኣበይ አሞ ኣይ ኣኸሎን እቲ ቃላት ንውዕለትካ (ንግብርኻ) (2)
-           መግለጺ ሓጎሰይ ግና ክበር ንገስ'የ ዝብለካ
-
-ልዑል ኣምላኽ ፍግም ኢለ እሰግደልካ
-ብሓጎስ ደስታ ተመሊአ ይዕልለልካ
-ዕቤትካ ሪኤ የሱሰይ እሽብሽበልካ
-ገለ ተገለጽኩ ካብ ውዕለትካ እቃንየልካ
-ብተኣምራትካ ተደኒቀ አመስግነካ
-               ብግርኻ......
-`,
-    eng: `1)
-Ayyeḥfrenn tihlawnetekha
-ʼKwa de’a yibleñi tens’e’ kab m’wedakha
-Selamey yisefen misaḫa k’ekewen
-ʼEti bādo libey birḥanka yiwnen
-
-2)
-Neti q’nu’ ʼawet kem t’ḥbo
-Yesusey nnṣuh kab kifu’ t’ḥilwo
-Ane g’na welḥanti zeybiley
-Kulu reḫibeyo b’fiqerka goytay
-
-3)
-Baḥri meqelu ḥezbuka zeḥlefe
-Natēy qelāyat entay keygebrōle
-Mis lemenk’wo ab af betka koyne
-Zre’akwo gibri m’glatsu s’ine
-
-(Chorus/Bridge)
-Kab libey misgana nabakha yidrguhō
-Neti zre’kwo (nezi zelekwo) gele entegeleṣo
-
-Entay alo emo ane zḥbeka
-Bzeyka mimsgan m’glas w’iletka
-Entay alo emo ane zḥbeka
-Yesusey mimsgan’yu m’glas w’iletka
-
-Meza:
-B’g’rka (b’te’amratka) tedniqe kemesgeneka fetine
-Abey amo ay akhelon ’eti q’lat n’wu’letka (n’gibrka)
-Megleṣi ḥagosey g’na k’ber n’ges’ye z’bleka
-
-L’ul Amlak f’g’m ile esegdelka
-B’ḥagos desta temeli’a yi’llellelka
-ʼIbetka rī’e yesusey eshbeshbelka
-Gele tegelesk’u kab wu’letka ’eqanyelka
-B’te’amratka tedniqe amesgeneka
-B’g’rka...`
-  },
-
-  
-  song5: {
-    title: { tig: "ብግብርኻ ተደኒቀ", eng: "By Your Work You Were Saved" },
-    tig: `6ብግብርኻ ተደኒቀ ...`,
-    eng: `By your work you were saved ...`
-  }
-  // add more songs here
+song1: {
+    title: { tig: "ናይ ሶንግ 1", eng: "Song 1" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-01",
+    tig: `1ናይ ሶንግ 1 ትርጉም ...`,
+    eng: `1 Song 1 lyrics ...`
+},
+song2: {
+    title: { tig: "ናይ ሶንግ 2", eng: "Song 2" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-02",
+    tig: `2ናይ ሶንግ 2 ትርጉም ...`,
+    eng: `2 Song 2 lyrics ...`
+},
+song3: {
+    title: { tig: "ናይ ሶንግ 3", eng: "Song 3" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-03",
+    tig: `3ናይ ሶንግ 3 ትርጉም ...`,
+    eng: `3 Song 3 lyrics ...`
+},
+song4: {
+    title: { tig: "ናይ ሶንግ 4", eng: "Song 4" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-04",
+    tig: `4ናይ ሶንግ 4 ትርጉም ...`,
+    eng: `4 Song 4 lyrics ...`
+},
+song5: {
+    title: { tig: "ናይ ሶንግ 5", eng: "Song 5" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-05",
+    tig: `5ናይ ሶንግ 5 ትርጉም ...`,
+    eng: `5 Song 5 lyrics ...`
+},
+song6: {
+    title: { tig: "ናይ ሶንግ 6", eng: "Song 6" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-06",
+    tig: `6ናይ ሶንግ 6 ትርጉም ...`,
+    eng: `6 Song 6 lyrics ...`
+},
+song7: {
+    title: { tig: "ናይ ሶንግ 7", eng: "Song 7" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-07",
+    tig: `7ናይ ሶንግ 7 ትርጉም ...`,
+    eng: `7 Song 7 lyrics ...`
+},
+song8: {
+    title: { tig: "ናይ ሶንግ 8", eng: "Song 8" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-08",
+    tig: `8ናይ ሶንግ 8 ትርጉም ...`,
+    eng: `8 Song 8 lyrics ...`
+},
+song9: {
+    title: { tig: "ናይ ሶንግ 9", eng: "Song 9" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-09",
+    tig: `9ናይ ሶንግ 9 ትርጉም ...`,
+    eng: `9 Song 9 lyrics ...`
+},
+song10: {
+    title: { tig: "ናይ ሶንግ 10", eng: "Song 10" },
+    author: { tig: "ሴም ፡ ኣድያም", eng: "Sem Adiam" },
+    album: { tig: "ንስል", eng: "Nsil" },
+    genre: { tig: "ምስጋና", eng: "Praise" },
+    date: "2023-03-10",
+    tig: `10ናይ ሶንግ 10 ትርጉም ...`,
+    eng: `10 Song 10 lyrics ...`
+},
+// … continue incrementally up to song64
 };
